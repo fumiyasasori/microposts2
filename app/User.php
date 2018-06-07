@@ -93,10 +93,8 @@ class User extends Authenticatable
     {
     // confirm if already following
     $exist = $this->is_favorite($micropostId);
-    // confirming that it is not you
-    $its_me = $this->id == $micropostId;
 
-    if ($exist || $its_me) {
+    if ($exist) {
         // do nothing if already following
         return false;
     } else {
@@ -110,11 +108,8 @@ public function unfavorite($micropostId)
 {
     // confirming if already following
     $exist = $this->is_favorite($micropostId);
-    // confirming that it is not you
-    $its_me = $this->id == $micropostId;
 
-
-    if ($exist && !$its_me) {
+    if ($exist) {
         // stop following if following
         $this->favorites()->detach($micropostId);
         return true;
